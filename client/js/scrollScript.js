@@ -31,6 +31,10 @@ myapp.controller('mainController', function($scope, $document) {
     $scope.toresults = function() {
       $document.scrollToElementAnimated(results);
     }
+    var stats = angular.element(document.getElementById('stats'));
+    $scope.tostats = function() {
+      $document.scrollToElementAnimated(stats);
+    }
 }).value('duScrollOffset', -3);
 
 

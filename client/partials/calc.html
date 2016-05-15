@@ -1,4 +1,5 @@
-<header id="calcHead">
+<div ng-controller="solarCalc">
+	<header id="calcHead">
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	    <div class="container">
 	        <div class="navbar-header">
@@ -25,8 +26,8 @@
     	</div>
     </nav>
 </header>
-<div class="container text-center" id="solarCalc" ng-controller="solarCalc">
-	<h3>Calculate your Solar Needs</h3>
+<div class="container text-center" id="solarCalc">
+	<h2>Calculate your Solar Needs</h2>
 	<br>
 	<br>
    	<form name="userRegister" novalidate role="form">
@@ -59,24 +60,53 @@
         </div>
         <br>
         <br>
-        	<a class="btn btn-info" du-smooth-scroll="results" du-scrollspy ng-click='solarCalc()'>Submit</a>
+        	<a class="btn btn-info submitButton" du-smooth-scroll="results" du-scrollspy ng-click='solarCalc()'>Submit</a>
     </form>
-    <div id="results" class="container">
-	<h2 class="text-center">Your Solar Results</h2>
-	<!-- <h3>Solar System Size</h3>
-	<h4>{{solarSystemSize}}</h4>
-	<h3>Solar System Cost</h3>
-	<h4>{{totalSolarSystemCost}}</h4>
-	<h3>Solar Units Produced per Month</h3>
-	<h4>{{solarUnitsPerMonth}}</h4>
-	<h3>Monthy savings on Electricty</h3>
-	<h4>{{monthlySavings}}</h4>
-	<h3>Monthly EMI</h3>
-	<h4>{{emi}}</h4> -->
-	
 </div>
+	<div id="results" class="container text-center" ng-if="emi">
+		<h2>Your Solar Results</h2>
+		<div id="solarResults">
+			<h3>Solar Units Produced per Month</h3>
+	    	<h4>{{solarUnitsPerMonth}} kWH</h4>
+	        <h3>Monthy savings on Electricty</h3>
+	        <h4>INR {{monthlySavings}}</h4>	
+	        <h3>Solar System Size</h3>
+	        <h4>{{solarSystemSize}} kWH</h4>	
+	        <h3>Solar System Cost</h3>
+	        <h4>INR {{totalSolarSystemCost}}</h4>
+	        <h3>Monthly EMI</h3>
+	        <h4>INR {{emi}}</h4>
+	        <a class="btn btn-primary btn-xl faq" du-smooth-scroll="stats" du-scrollspy>View Projected Cash OutFlow</a>
+		</div>
+	</div>
+	<div id="stats" class="container text-center" ng-controller="solarCalc" ng-if="emi">
+		<div id="charts">	
+			<fusioncharts
+			    width="600" 
+			    height="400"
+			    type="mscombi2d"
+			    datasource="{{dataSource}}"
+			></fusioncharts>
+		</div>
+		<a class="btn btn-primary btn-xl connect" data-toggle="modal" data-target="#myModalConnect">Connect with us</a>
+	</div>
 </div>
-
+<div id="footer" class="container text-center">
+    <h4>Oorjan Cleantech Private Ltd.</h4>
+    <div id="footerInside" class="container text-center">
+        <h5>Excom House, Saki Naka
+            Mumbai-400072
+        </h5>
+        <h5>
+            Ring us at 08030636150 & 
+            we will call you back.
+        </h5>
+        <a href=""><h5>lovesolar@oorjan.com</h5></a>
+            <a href=""><img src="./img/facebook.png"></a>
+            <a href=""><img src="./img/twitter.png"></a>
+    </div>
+    <h5>Copyright © Oorjan Cleantech 2015</h5>
+</div>
 <div class="modal fade" id="myModalConnect" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
