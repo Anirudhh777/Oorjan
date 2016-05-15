@@ -1,0 +1,8 @@
+{
+  "name": "Oorjan",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-scroll": "^1.0.0",
+    "express": "latest"
+  }
+}

@@ -1,0 +1,439 @@
+<header id="calcHead">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href=/>
+                <img src="../img/logo.png"/>
+            	</a>
+	        </div>
+	        <div class="collapse navbar-collapse" id="collapse">
+	            <ul class="nav navbar-nav navbar-right">
+	                <li class="active"><a href="#">Home</a></li>
+	                <li><a href="" data-toggle="modal" data-target="#myModalConnect">Contact</a></li>
+	                <li><a href="">Blog</a></li>
+	                <li><a href="" data-toggle="modal" data-target="#myModalFaq">FAQ</a></li>
+	                <li><a href="" data-toggle="modal" data-target="#myModalLogin">Login</a></li>
+	            </ul>  
+	            <li>     
+	        </div>
+    	</div>
+    </nav>
+</header>
+<div class="container text-center" id="solarCalc" ng-controller="solarCalc">
+	<h3>Calculate your Solar Needs</h3>
+	<br>
+	<br>
+   	<form name="userRegister" novalidate role="form">
+        <div class="form-group">
+            <label for="location">Location:</label><br>
+            <select class="form-control" name="location" ng-model='calc.location1'>
+		        <option value=7>Mumbai</option>
+		        <option value=9>Pune</option>
+		        <option value=5>Bangalore</option>
+		     </select>
+        </div>
+        <div class="form-group">
+            <label for="roofSize">Roof Size:</label><br>
+            <input class="form-control" type='number' name="roofSize" ng-model='calc.roofSize' placeholder="Sq ft">
+        </div>
+        <div class="form-group">
+            <label for="units">Electricity units consumed / month</label><br>
+            <input class="form-control" type='number' name="units" ng-model='calc.units' placeholder="Units in kWH">
+        </div>
+        <div class="form-group">
+            <label for="amount">Loan Amount Percent</label><br>
+            <input class="form-control" type='number' name="amount" ng-model='calc.amount' placeholder="Max 85%"><br>
+        </div>
+        <div class="form-group">
+            <label for="tenure">Loan Tenure</label><br>
+            <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=5>5 Years</label>
+            <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=6>6 Years</label>
+			<label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=7>7 Years</label>
+            <br>
+        </div>
+        <br>
+        <br>
+        	<a class="btn btn-info" du-smooth-scroll="results" du-scrollspy ng-click='solarCalc()'>Submit</a>
+    </form>
+    <div id="results" class="container">
+	<h2 class="text-center">Your Solar Results</h2>
+	<!-- <h3>Solar System Size</h3>
+	<h4>{{solarSystemSize}}</h4>
+	<h3>Solar System Cost</h3>
+	<h4>{{totalSolarSystemCost}}</h4>
+	<h3>Solar Units Produced per Month</h3>
+	<h4>{{solarUnitsPerMonth}}</h4>
+	<h3>Monthy savings on Electricty</h3>
+	<h4>{{monthlySavings}}</h4>
+	<h3>Monthly EMI</h3>
+	<h4>{{emi}}</h4> -->
+	
+</div>
+</div>
+
+<div class="modal fade" id="myModalConnect" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Connect With Oorja</h3>
+                <form method="post" class="form">
+
+                    <input type='hidden' name='csrfmiddlewaretoken' value='SisUUaiydAyOAaBPlPBa2vEg3wgIeyrD' />
+
+                    <div class='row form-group'>
+                        <div class='col-md-12'>
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label class="sr-only control-label" for="id_first_name">First name</label>
+                            <input class="form-control" id="id_first_name" maxlength="100" name="first_name" placeholder="First name" required="required" title="" type="text" />
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label class="sr-only control-label" for="id_last_name">Last name</label>
+                            <input class="form-control" id="id_last_name" maxlength="100" name="last_name" placeholder="Last name" required="required" title="" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="id_phone_number_1" name="phone_number_1" placeholder="Phone number" title="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="id_email">Email</label>
+                        <input class="form-control" id="id_email" maxlength="100" name="email" placeholder="Email" required="required" title="" type="email" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="id_project_location">Project location</label>
+                        <input class="form-control" id="id_project_location" maxlength="100" name="project_location" placeholder="Mumbai, Bangalore, etc" required="required" title="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="id_company">Company</label>
+                        <input class="form-control" id="id_company" maxlength="100" name="company" placeholder="Company" title="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="id_interest">What best describes you?</label>
+                        <select class="form-control" id="id_interest" name="interest" required="required" title="">
+                            <option value="I am looking for a solar loan for my home/business">I am looking for a solar loan for my home/business</option>
+                            <option value="I am an installer and would like to become an Oorjan partner to avail financing services">I am an installer and would like to become an Oorjan partner to avail financing services</option>
+                            <option value="I am an investor looking to expand my portfolio in solar projects">I am an investor looking to expand my portfolio in solar projects</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="id_message">What can Oorjan help you with</label>
+                        <textarea class="form-control" cols="40" id="id_message" maxlength="2048" name="message" placeholder="What can Oorjan help you with" required="required" rows="10" title="">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span class="glyphicon glyphicon-envelope"></span> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModalLogin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Login</h3>
+                <form role="form">
+                    <label for="email">Email:</label><br>
+                    <input type='email' name="email" class="form-control"><br>
+                    <label for="password">Password:</label><br>
+                    <input type='password' name="password" class="form-control"><br>
+                    <input type='submit' value='Login' class="btn btn-info" data-dismiss="modal">
+                </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div id="modalFaq">
+    <div class="modal fade" id="myModalFaq" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Frequently Asked Questions</h3>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">What are the terms and conditions of the loans?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>For Individuals</th>
+                                        <th>Small & Medium Enterprises / Hotel/ Hospitals/ Institutions</th>
+                                        <th style="word-break:break-all">Housing Societies</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-md-1">Eligible Products</td>
+                                        <td class="col-md-4">Solar Energy System for Electricity</td>
+                                        <td class="col-md-4">Solar Energy System for Electricity</td>
+                                        <td class="col-md-3">Solar Energy System for Electricity</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Max loan %</td>
+                                        <td class="col-md-4">85%</td>
+                                        <td class="col-md-4">80%</td>
+                                        <td class="col-md-3">80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Max loan amount for Solar Energy System</td>
+                                        <td class="col-md-4">25 lakh</td>
+                                        <td class="col-md-4">1.5 cr</td>
+                                        <td class="col-md-3">1.5 cr<br><br>
+                                            Restricted to 3-5 times the average balance in current/SB account in the last 12 - 24 months.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Max repayment period</td>
+                                        <td class="col-md-4 text-center" colspan="3">7 years</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Payment Form</td>
+                                        <td class="col-md-4"><b>EMI</b></td>
+                                        <td class="col-md-4"><b>EMI</b></td>
+                                        <td class="col-md-3"><b>EMI</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Eligibility Criterion</td>
+                                        <td class="col-md-4">KYC and Credit Check</td>
+                                        <td class="col-md-4">Profit for the last 2 years.
+                                            The applicant shall not have overdue loans with any other Institution / Bank.
+                                        </td>
+                                        <td class="col-md-3">Existing housing societies,
+                                            having minimum vintage of 1 year<br><br>
+                                            Resolutions passed in General Body Meeting of Residents to avail finance from the Bank.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Primary Security</td>
+                                        <td class="col-md-4 text-center" colspan="3">
+                                            Hypothecation of the assets purchased out of Bank Finance
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Secondary Collateral</td>
+                                        <td class="col-md-4"> For <b>Loan upto Rs. 3 lakh:</b>
+                                            Guarantee of a credit worth person
+                                            (having networth of atleast 5 times the loan amount)
+                                            <br><br>
+                                            For Loan > Rs. 3 lakh: Non-agricultural securities,
+                                            Cash Collateral in the form of FDs, KVPs,
+                                            Life Insurance Policies (surrender value) etc.
+                                            <br><br>
+                                            OR
+                                            <br><br>
+                                            Existing Home Loan Customer:
+                                            Extension of Mortgage of the residential property
+                                            <br><br>
+                                            OR
+                                            <br><br>
+                                            Other Bank Home Loan Customer:
+                                            Second Charge on the property
+                                        </td>
+                                        <td class="col-md-4">
+                                            Mortgage of residential/commercial property
+                                            <br><br>
+                                            OR
+                                            <br><br>
+                                             Suitable non-agricultural security (100%).
+                                            (non-agri land, building, FDs, KVPs,
+                                            Life Insurance Policies (surrender value) etc.)
+                                        </td>
+                                        <td class="col-md-3">
+                                            Lien on current account of the Housing Society with the Bank
+                                            <br><br>
+                                            OR
+                                            <br><br>
+                                            Cash collateral in the form of FDs/RD.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Minimum loan interest rate</td>
+                                        <td class="col-md-4 text-center" colspan="3">
+                                            BBR + 1.5%<br>
+                                            BBR + 1.0% (women and weaker sections)<br>
+                                            <b><i>Current BBR = 9.75%</i></b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Processing fees</td>
+                                        <td class="col-md-4 text-center" colspan="3">
+                                            upto Rs. 1 lakh – Nil<br>
+                                            &<br>
+                                             above Rs. 1 lakh - 0.50% of sanctioned amount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-1">Insurance</td>
+                                        <td class="col-md-4 text-center" colspan="3">
+                                            Asset created out of Bank's loan to be insured in favour of bank till loan repayment.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table><br>
+                            <h4 class="text-center"><b><i>Loan will be closed on-site. No need to visit a
+                                branch!</i></b></h4>
+                        </div>
+                    </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">How do we support large rooftop project financing?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            We are working with private investors looking for credible roof-owners to fund large projects on a pay-per-unit basis. We can arrange financing for projects with the following specifications:
+                            <ul>
+                                <li>80KW + project size</li>
+                                <li>All-states are acceptable</li>
+                                <li>Net metering desirable, not mandatory</li>
+                                <li>The customer should be willing to share their financial details for due-diligence</li>
+                                <li>Typical contract duration 10-20 years</li>
+                                <li>BOOT price starting at Rs.5/KWh</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">How do we get the Monitoring App?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Each project financed by Oorjan, comes with our proprietary Monitoring App that provides information to the customer and Oorjan information about the project performance during the loan term. To the customer, it will also give Alerts and Notifications for cleaning and any any other maintenance requirement.  In case of a problem, the customer can contact us for support.
+                            <br><br>
+                            You can download the App from the <a target="_blank" href="https://play.google.com/store/apps/details?id=com.oorjan.monitoring&hl=en">Google Play Store</a> or <a target="_blank" href="https://itunes.apple.com/us/app/oorjan-solar-monitoring/id1081308936?ls=1&mt=8">Apple App Store</a> and check out a live system at Bangalore.
+                            <br><br>
+                            <b>Guest Login Details</b><br>
+                            Username: bangalore1<br>
+                            Password: bangalore1<br>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">How to understand if the proposal that the customer has received is correct?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            As part of the financing process, Oorjan ensures if the system components are MNRE qualified and also meet all other State mandated criteria. Systems received from Oorjan Installer Partners typically satisfy this criterion. For systems by other installers, as part of the due-diligence, Oorjan will provide any necessary feedback.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Does Oorjan finance MW scale projects?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            We finance any rooftop and captive projects.<br>
+                            Unfortunately, we cannot help with open access / large scale MW projects.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Can we provide working capital financing to the Installers?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Our current financiers are only financing end customers. So we are not currently enabling working capital financing to the service providers.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Do we support off-grid systems or systems with batteries?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseSeven" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Yes. Large part of the country does not have stable electricity and one of the key drivers for considering solar is that it can be used to charge batteries. Oorjan will follow the same quality verification process for battery based systems, but enable funding for them as well.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">Can we arrange funds for social causes or donations?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseEight" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            We are happy to seek donors when the system is required for BPL families, social institutes, etc. The availability of funds depends on case-by-case basis. Please contact us with the details of who the funds are being sought out for.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">I am an entrepreneur and have just started my solar business in my home town. Can Oorjan support me?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseNine" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Absolutely yes!<br>
+                            We want more and more service providers and the system installers to be able to serve customers in their locality. There are many roofs in the country and we need a lot of trained personnel to work on them. If you need help with system design, procurement or financing, we will support your start-up.
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">If I am an investment firm OR a private investor, can Oorjan help us finance solar projects?</span>
+                        </h4>
+                    </div>
+                    <div id="collapseTen" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Absolutely yes!<br>
+                            Connecting investors to the projects is the primary motivation behind Oorjan’s financing platform. We will work with you on your financial expectations and identify projects that meet that goal. Please contact us to discuss further.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
