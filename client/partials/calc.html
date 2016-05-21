@@ -30,10 +30,10 @@
 	<h2>Calculate your Solar Needs</h2>
 	<br>
 	<br>
-   	<form name="myForm" role="form" novalidate>
+   	<form name="myForm" role="form">
          <div class="form-group">
-            <label for="location">Location:</label><br>
-            <select class="form-control" name="location1" ng-model='calc.location1' required>
+            <label for="location1">Location:</label><br>
+            <select class="form-control" name="location1" ng-model='calc.location1' id="solarLocation">
                 <option value=7>Mumbai</option>
                 <option value=9>Pune</option>
                 <option value=5>Bangalore</option>
@@ -47,37 +47,64 @@
             <label for="units">Electricity units consumed / month</label><br>
             <input class="form-control" type='number' name="units" ng-model='calc.units' placeholder="Units in kWH">
         </div>
-        <div class="form-group">
-            <label for="amount">Loan Amount Percent</label><br>
-            <input class="form-control" type='number' name="amount" ng-model='calc.amount' placeholder="Max 85%"><br>
+        <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading" id="loanPanel" data-target="#collapse1">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-target="#collapse1">Loan (Optional)</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="amount">Loan Amount Percent</label><br>
+                        <input class="form-control" type='number' name="amount" ng-model='calc.amount' placeholder="Max 85%"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenure">Loan Tenure</label><br>
+                        <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=5>5 Years</label>
+                        <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=6>6 Years</label>
+                        <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=7>7 Years</label>
+                        <br>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="tenure">Loan Tenure</label><br>
-            <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=5>5 Years</label>
-            <label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=6>6 Years</label>
-			<label class="radio-inline"><input type="radio" name="tenure" ng-model='calc.tenure' value=7>7 Years</label>
-            <br>
-        </div>
-        <br>
-        <br>
         	<a class="btn btn-info submitButton" du-smooth-scroll="results" du-scrollspy ng-click='solarCalc()'>Submit</a>
     </form>
 </div>
-	<div id="results" class="container text-center" ng-if="emi">
-		<h2>Your Solar Results</h2>
-		<div id="solarResults">
-			<h3>Solar Units Produced per Month</h3>
-	    	<h4>{{solarUnitsPerMonth}} kWH</h4>
-	        <h3>Monthy savings on Electricty</h3>
-	        <h4>INR {{monthlySavings}}</h4>	
-	        <h3>Solar System Size</h3>
-	        <h4>{{solarSystemSize}} kWH</h4>	
-	        <h3>Solar System Cost</h3>
-	        <h4>INR {{totalSolarSystemCost}}</h4>
-	        <h3>Monthly EMI</h3>
-	        <h4>INR {{emi}}</h4>
-	        <a class="btn btn-primary btn-xl faq" du-smooth-scroll="stats" du-scrollspy>View Projected Cash OutFlow</a>
-		</div>
+	<div id="results" class="container text-center">
+        <div ng-if="showEmi === true">
+            <h2>Your Solar Results</h2>
+            <div id="solarResults">
+                <h3>Solar Units Produced per Month</h3>
+                <h4>{{solarUnitsPerMonth}} kWH</h4>
+                <h3>Monthy savings on Electricty</h3>
+                <h4>INR {{monthlySavings}}</h4> 
+                <h3>Solar System Size</h3>
+                <h4>{{solarSystemSize}} kWH</h4>    
+                <h3>Solar System Cost</h3>
+                <h4>INR {{totalSolarSystemCost}}</h4>
+                <h3>Monthly EMI</h3>
+                <h4>INR {{emi}}</h4>
+                <a class="btn btn-primary btn-xl faq" du-smooth-scroll="stats" du-scrollspy>View Projected Cash OutFlow</a>
+            </div>
+        </div>
+        <div ng-if="noEmi === true">
+            <h2 id="noEmiResults">Your Solar Results</h2>
+            <div id="solarResults1">
+                <h3>Solar Units Produced per Month</h3>
+                <h4>{{solarUnitsPerMonth}} kWH</h4>
+                <h3>Monthy savings on Electricty</h3>
+                <h4>INR {{monthlySavings}}</h4> 
+                <h3>Solar System Size</h3>
+                <h4>{{solarSystemSize}} kWH</h4>    
+                <h3>Solar System Cost</h3>
+                <h4>INR {{totalSolarSystemCost}}</h4>
+                <a class="btn btn-primary btn-xl faq" du-smooth-scroll="stats" du-scrollspy>View Projected Cash OutFlow</a>
+            </div>
+        </div>
 	</div>
 	<div id="stats" class="container text-center" ng-controller="solarCalc" ng-if="emi">
 		<div id="charts">	
@@ -90,6 +117,17 @@
 		</div>
 		<a class="btn btn-primary btn-xl connect" data-toggle="modal" data-target="#myModalConnect">Connect with us</a>
 	</div>
+    <div id="stats" class="container text-center" ng-controller="solarCalc" ng-if="noEmi">
+        <div id="charts">   
+            <fusioncharts
+                width="600" 
+                height="400"
+                type="mscombi2d"
+                datasource="{{dataSource}}"
+            ></fusioncharts>
+        </div>
+        <a class="btn btn-primary btn-xl connect" data-toggle="modal" data-target="#myModalConnect">Connect with us</a>
+    </div>
 </div>
 <div id="footer" class="container text-center">
     <h4>Oorjan Cleantech Private Ltd.</h4>
