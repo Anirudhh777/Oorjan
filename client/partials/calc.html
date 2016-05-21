@@ -30,14 +30,14 @@
 	<h2>Calculate your Solar Needs</h2>
 	<br>
 	<br>
-   	<form name="userRegister" novalidate role="form">
-        <div class="form-group">
+   	<form name="myForm" role="form" novalidate>
+         <div class="form-group">
             <label for="location">Location:</label><br>
-            <select class="form-control" name="location" ng-model='calc.location1'>
-		        <option value=7>Mumbai</option>
-		        <option value=9>Pune</option>
-		        <option value=5>Bangalore</option>
-		     </select>
+            <select class="form-control" name="location1" ng-model='calc.location1' required>
+                <option value=7>Mumbai</option>
+                <option value=9>Pune</option>
+                <option value=5>Bangalore</option>
+             </select>
         </div>
         <div class="form-group">
             <label for="roofSize">Roof Size:</label><br>

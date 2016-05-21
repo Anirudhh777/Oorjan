@@ -12,11 +12,12 @@ var myapp = angular.module('Oorjan', ['ngRoute', 'duScroll', 'ng-fusioncharts'])
         });
     });
 
-myapp.controller('solarCalc', function($scope, $document) {
+myapp.controller('solarCalc', ['$scope', function($scope, $document) {
     var results = angular.element(document.getElementById('results'));
     $scope.toresults = function() {
       $document.scrollToElementAnimated(results);
     }
+
     $scope.solarCalc = function() {
         var interest = 11;
         var unitSolarSystemCost = 75000;
@@ -317,4 +318,5 @@ myapp.controller('solarCalc', function($scope, $document) {
             }
         ]
     }
-}).value('duScrollOffset', -3);
+        
+}]).value('duScrollOffset', -3);
